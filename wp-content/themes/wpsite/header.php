@@ -4,7 +4,15 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
 	<title><?php bloginfo('name'); ?><?php wp_title('|'); ?></title>
-	<?php wp_head(); ?>
+        <?php if(is_single()):
+            $post_thumbnail_id = get_post_thumbnail_id($post->ID);
+            $post_thumbnail_url = wp_get_attachment_url( $post_thumbnail_id );
+        ?>        
+            <meta name="Keywords" content="<?php the_title()?>">
+            <meta name="og:image" content="<?php echo $post_thumbnail_url;?>">
+            <meta name="description" content="<?php echo get_the_excerpt();?>">
+	<?php endif;?>
+        <?php wp_head(); ?>
 	 
 </head>
 <body>
@@ -29,8 +37,16 @@
                 <div class="col-lg-2"></div>
                 <div class="col-lg-4">
                     <div class="connexion">
-                        <a href="#">Connexion</a>
-                        <a href="#">Inscription</a>
+                        <?php 
+                            $user = wp_get_current_user();
+                            if($user->ID == 0):
+                        ?>
+                        <a href="<?php echo bloginfo('url')?>/login">Connexion</a>
+                        <a href="<?php echo bloginfo('url')?>/inscription">Inscription</a>
+                        <?php else:?>                        
+                            <a href="<?php echo bloginfo('url')?>/profile">Profile</a>
+                            <a href="<?php echo bloginfo('url')?>/coupons">Mes coupons</a>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>
@@ -45,6 +61,14 @@
                     </div>                    
                 </div>
                 <div class="col-lg-10">
+                    <div class="welcome">
+                        <?php 
+                            if($user->ID != 0){
+                                echo "Bonjour, ".$user->last_name." ".$user->first_name;
+                        ?>
+                        <a href="<?php echo bloginfo('url')?>/logout">Déconnexion</a>
+                        <?php } ?>
+                    </div>
                     <?php wp_nav_menu(array('theme_location' => 'header')); ?>
                 </div>
             </div>

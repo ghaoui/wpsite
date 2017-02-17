@@ -3,6 +3,7 @@
     <div class="container">
         <div class="row" data-uk-grid-match="target: '.item'">
             <?php 
+            
 
                 if ( have_posts() ) :
                     while ( have_posts() ) : the_post(); 
@@ -11,7 +12,7 @@
                 <a href="<?php the_permalink();?>" class="link-item">
                     <div class="item">
                         <div class="excerpt">
-                            <?php the_excerpt();?>
+                            <?php echo excerpt(20);?>
                         </div>
                         <figure class="uk-overlay uk-overlay-hover">
                             <?php the_post_thumbnail('post-thumbnail', array('class' => 'uk-overlay-spin'));?>

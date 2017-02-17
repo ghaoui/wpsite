@@ -32,7 +32,9 @@
                 $args  = array(
                     'post_type' => 'post',
                     'order' => 'DESC',
-                    'posts_per_page'=> -1
+                    'posts_per_page'=> -1,
+                    'meta_key'		=> 'deals_terminer',
+                    'meta_value'	=> 'non'
                 );
                 $the_query = new WP_Query( $args ); 
                 if ( $the_query->have_posts() ) :
@@ -63,9 +65,15 @@
                         <span class="apres"><?php the_field('apres_prix')?> DT</span>
                         <span class="avant"><?php the_field('avant_prix')?> DT</span>
                     </div>
+                    <?php if(get_field('nombre_deal')!=""):?>
+                    <div class="nombre_deal">
+                        <img src="<?php bloginfo('stylesheet_directory'); ?>/images/marker.png" alt=""> <?php the_field('nombre_deal')?>
+                    </div>
+                    <?php endif;?>
                     <div class="dejaacheter">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php the_field('counter')?>
                     </div>
+                    
                     <a href="<?php the_permalink();?>" class="link-voir">
                         Voir Deal
                     </a>
