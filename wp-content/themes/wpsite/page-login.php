@@ -6,16 +6,16 @@ if(!empty($_POST)){
         $error = $user->get_error_message();
     }else{
         if(isset($_SESSION['addToCart'])){
-            header('Location: /wpsite/panier');
+            header('Location: /panier');
         }else {
-            header('Location: /wpsite');
+            header('Location: /');
         }
     }   
 }
 else{
     $user = wp_get_current_user();
     if($user->ID != 0){
-        header('Location: /wpsite/profile');
+        header('Location: /profile');
     }
 }
     

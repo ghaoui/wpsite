@@ -104,9 +104,87 @@ $(document).ready(function(){
         
         $( "#naissance" ).datepicker();
         
-        // profile
+        // cart
+        $('.removeCart').click(function(){
+            var tr = this;
+            $.ajax({
+                url: ajaxurl,
+                type: 'post',
+                data: {
+                  action : "remove_cart",
+                  id : $(tr).data('id'),         
+                },
+                success: function (data) {
+                    if(parseInt(data) > 0){
+                        $(tr).parents('tr').hide('slow', function(){
+                            $(tr).parents('tr').remove();
+                            var tot = 0;
+                            $('.prix_tot').each(function(index, elem){
+                                tot = tot + parseFloat($(elem).html());
+                            })
+                            $('.panier .total').html(tot.toFixed(3));
+                        })
+                    } else if(parseInt(data) == 0){
+                        $(tr).parents('table').hide('slow', function(){
+                            $(tr).parents('table').remove();
+                                    
+                        });
+                        $('.other-check').hide('slow', function(){
+                            $('.other-check').remove();
+                            $('#panier-vide').show('slow');
+                        });
+                    } 
+                    $('.panier .counter').html(data);
+                    
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                      console.log(xhr.status);
+                      console.log(xhr.responseText);
+                      console.log(thrownError);
+                  },
+                  beforeSend : function(){
+                      //alert('salut');
+                  },
+                  complete : function(){
+                      //alert('fin');
+                  }
+              });
+            
+        });
         
- 
+        $(".panier .quantite").keydown(function (e) {
+                    // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: Ctrl+C
+                (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: Ctrl+X
+                (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39) ||
+                //Allow numbers and numbers + shift key
+                ((e.shiftKey && (e.keyCode >= 48 && e.keyCode <= 57)) || (e.keyCode >= 96 && e.keyCode <= 105))){
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((!e.shiftKey && (e.keyCode < 48 || e.keyCode > 57)) || (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+                });
+                
+        $(".panier .quantite").keyup(function(){
+            var prix_uni = $(this).parents('tr').find('.prix_uni').html();
+            var qte = ($(this).val() === "")? 0: $(this).val();
+            var prix_tot = parseFloat(prix_uni) * parseInt(qte);
+            $(this).parents('tr').find('.prix_tot').html(prix_tot.toFixed(3));
+            var tot = 0;
+            $('.prix_tot').each(function(index, elem){
+                tot = tot + parseFloat($(elem).html());
+            })
+            $('.panier .total').html(tot.toFixed(3));
+        });
 });
 
 function initMap() { 
@@ -120,7 +198,7 @@ function initMap() {
         disableDefaultUI: true
     });
     
-    var image = 'http://saad.com.tn/wpsite/wp-content/themes/wpsite/images/marker.png';
+    var image = 'http://dealtounsi.com/wp-content/themes/wpsite/images/marker.png';
     var marker = new google.maps.Marker({
       position: {lat: parseFloat(lat), lng: parseFloat(long)},
       map: map,

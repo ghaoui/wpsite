@@ -1,7 +1,7 @@
 <?php 
  $user = wp_get_current_user();
     if($user->ID == 0){
-        header('Location: /wpsite/login');
+        header('Location: /login');
     }
 ?>
 <?php 
@@ -40,7 +40,7 @@ if(!empty($_POST)){
                 //wp_mail("ghaoui.hamdi@gmail.com", 'Inscription réussie', $message, $headers);
                 $d = array();                
                // wp_signon($_POST);                
-                header('Location: /wpsite/profile');
+                header('Location: /profile');
             }
         }
     }
@@ -85,7 +85,7 @@ if(!empty($_POST)){
                                             <input type="text" name="city" id="city" class="form-control input-lg" placeholder="Ville " value="<?php echo (isset($d['city']))? $d['city']: get_user_meta($user->ID, 'city', true);;?>">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="thestate" id="thestate" class="form-control input-lg" placeholder="Régionl " value="<?php echo (isset($d['thestate']))? $d['thestate']: get_user_meta($user->ID, 'thestate', true);?>">
+                                            <input type="text" name="thestate" id="thestate" class="form-control input-lg" placeholder="Région " value="<?php echo (isset($d['thestate']))? $d['thestate']: get_user_meta($user->ID, 'thestate', true);?>">
                                         </div>
                                         <div class="form-group">
                                             <input type="text" name="pays" id="pays" class="form-control input-lg" placeholder="Pays " value="<?php echo (isset($d['pays']))? $d['pays']: get_user_meta($user->ID, 'pays', true);?>">

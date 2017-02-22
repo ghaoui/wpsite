@@ -27,13 +27,13 @@ if(!empty($_POST)){
                 update_user_meta($user, 'zip', $d['zip']);
                 update_user_meta($user, 'phone1', $d['phone1']);
                 update_user_meta($user, 'naissance', $d['naissance']);
-                $message = 'Vous étes maintenant inscrit';
+                $message = "Bonjour ".$d['last_name']." ".$d['first_name'].".<br>Merci de votre inscription sur DealTounsi.<br>Vous pouvez désormais vous connecter à https://dealtounsi.com/ avec votre identifiant et mot de passe :<br>Identifiant : ".$d['user_login']."<br>Mot de passe : ".$d['user_pass'];
                 $headers = 'From : '.get_option('admin_email')."\r\n";
-                //wp_mail($d['user_email'], 'Inscription réussie', $message, $headers);
-                wp_mail("ghaoui.hamdi@gmail.com", 'Inscription réussie', $message, $headers);
+                $title="Détails du compte utilisateur de ".$d['last_name']." ".$d['first_name']." à DealTounsi";
+                wp_mail($d['user_email'], $title, $message, $headers);
                 $d = array();                
                // wp_signon($_POST);                
-                header('Location: /wpsite/login');
+                header('Location: /login');
             }
         }
     }
@@ -78,7 +78,7 @@ if(!empty($_POST)){
                                             <input type="text" name="city" id="city" class="form-control input-lg" placeholder="Ville " value="<?php echo (isset($d['city']))? $d['city']: '';?>">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="thestate" id="thestate" class="form-control input-lg" placeholder="Régionl " value="<?php echo (isset($d['thestate']))? $d['thestate']: '';?>">
+                                            <input type="text" name="thestate" id="thestate" class="form-control input-lg" placeholder="Région " value="<?php echo (isset($d['thestate']))? $d['thestate']: '';?>">
                                         </div>
                                         <div class="form-group">
                                             <input type="text" name="pays" id="pays" class="form-control input-lg" placeholder="Pays " value="<?php echo (isset($d['pays']))? $d['pays']: '';?>">

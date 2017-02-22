@@ -16,7 +16,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 @import "compass";
 $red : #E40045;
-$green: #09A299;
+$green: #009EE3;
 body{
 	.back-top {
 	    display: none;
@@ -60,6 +60,9 @@ header{
         display: flex;
         justify-content: center;
         align-items: center;
+        &:hover{
+            text-decoration: none;
+        }
         .counter{
             position: absolute;
             right: -25px;
@@ -358,12 +361,12 @@ header{
     }
 }
 footer{
-    background-color: #000;
+    background-color: #41D2FF;
     padding-top: 15px;
     padding-bottom: 15px;
     color: #fff;
     h2{
-        color: red;
+        color: $red;
         font-size: 20px;
     }
     ul{
@@ -542,7 +545,7 @@ footer{
         font-size: 20px;
         color: #000;
         span{
-            color: #28A9A1;
+            color: $green;
         }
     }
     .description{
@@ -565,7 +568,7 @@ footer{
         margin-bottom: 15px;
         
         h2{
-            color: #09A299;
+            color: $green;
         }
         p{
             font-size: 18px;
@@ -689,6 +692,51 @@ footer{
                         background-color: #fff;
                         color: $red;
                     }
+                }
+            }
+        }
+    }
+}
+.panier{
+    .btn-danger{
+        border-color: $red;
+        background-color: $red;
+    }
+    .btn-success{
+       border-color: $green;
+       background-color: $green; 
+    }
+    .panier-vide{
+        background-color: $red;
+        color: #fff;
+        text-align: center;
+        font-size: 22px;
+        padding: 15px 0;
+        margin: 15px 0;
+    }
+    #panier-vide{
+        display: none;
+    }
+}
+.checkout{
+    p{
+        text-align: center;
+        font-size: 30px;
+    }
+}
+.coupons{
+    margin-top: 45px;
+    h2{
+        font-size: 32px;
+        color: $red;
+        border-bottom: 1px solid $green;
+    }
+    table{
+        tr{
+            td{
+                vertical-align: middle;
+                table{
+                    margin-bottom: 0;
                 }
             }
         }

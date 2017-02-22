@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
-                <a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/footerlogo.png" alt=""></a>
+                <a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/logo.png" alt=""></a>
             </div>
             <div class="col-lg-10">
                 <div class="row">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-lg-3">
                         <h2>CONTACTEZ NOUS</h2>
-                        <p>Address: Résidance Essalem, 3 Etage Bloc B, Rue Lamine Echebbi Naser 2 E-mail: <a href="mailto:contact@crazydeal.tn">contact@crazydeal.tn </a><br> Service Client<br> +216 31 13 11 11 // 50 720 991 // 58 139 308</p>
+                        <p>Address: Résidance Essalem, 3 Etage Bloc B, Rue Lamine Echebbi Naser 2 E-mail: <a href="mailto:contact@dealtounsi.com">contact@dealtounsi.com</a><br> Service Client<br> +216 52 800 410</p>
                     </div>
                     <div class="col-lg-3">
                         <h2>NOS SERVICES</h2>
@@ -71,7 +71,7 @@
     </div>
 </footer>
 <section class="subfooter">
-    Copyright © 2017 CrazyDeal. Tous droits réservés.
+    Copyright © 2017 Dealtounsi. Tous droits réservés. - <a target="_blank" href="https://www.linkedin.com/in/hamdi-ghaoui-68210250/">DEVGH</a>
 </section>
 <a href="#" class="back-top uk-icon-chevron-up"></a>
 <?php wp_footer(); ?>

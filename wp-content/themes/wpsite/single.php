@@ -101,7 +101,7 @@
                 $args  = array(
                     'post_type' => 'post',
                     'order' => 'DESC',
-                    'posts_per_page'=> -4,
+                    'posts_per_page'=> 4,
                     'meta_key'		=> 'deals_terminer',
                     'meta_value'	=> 'non'
                 );

@@ -1,7 +1,7 @@
 <?php 
  $user = wp_get_current_user();
     if($user->ID == 0){
-        header('Location: /wpsite/login');
+        header('Location: /login');
     }
 ?>
 <?php get_header(); ?>

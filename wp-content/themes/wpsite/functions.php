@@ -66,32 +66,16 @@ add_theme_support( 'post-thumbnails', array( 'page', 'post', 'slider', 'sponsors
 //set_post_thumbnail_size( 300, 300 );
 
 /*ajax perform*/
-add_action( 'wp_ajax_search_document', 'search_document' );
-add_action( 'wp_ajax_nopriv_search_document', 'search_document' );
+add_action( 'wp_ajax_remove_cart', 'remove_cart' );
+add_action( 'wp_ajax_nopriv_remove_cart', 'remove_cart' );
 
 
-function search_document() {
-	$keyword = $_POST['keyword'];
-	$year = $_POST['year'];
-	$month = $_POST['month'];
-        $home = $_POST['home'];
-	$args = array(
-	    'post_type' => 'document',	
-	    's' => $keyword,
-	    'date_query' => array(
-			array(
-				'year'  => $year,
-				'month' => $month,
-				//'day'   => 12,
-			),
-		),
-		'post_status'=> array( 'publish','future'),
-		'orderby' => 'date',
-		'order'  => 'DESC'   
-	);
-        if ($home == 'ok') {require_once 'inc/result_search.php';}
-        else {require_once 'inc/result_search_interne.php';}
-	//print_r($ajax_query);
+function remove_cart() {
+	$id = $_POST['id'];
+        $myCart = $_SESSION['myCart'];
+        unset($myCart[$id]);
+        $_SESSION['myCart'] = $myCart;
+        echo count($_SESSION['myCart']);
 	die();
 }
 
