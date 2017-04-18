@@ -6,7 +6,21 @@ $(document).ready(function(){
     );
   }); 
  
- 
+ var offset = 220;
+    var duration = 500;
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+            $('.back-top').fadeIn(duration);
+        } else {
+            $('.back-top').fadeOut(duration);
+        }
+    });
+    $('.back-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    });
+    
  // login page
  $('.button-checkbox').each(function(){
 		var $widget = $(this),
@@ -127,7 +141,7 @@ $(document).ready(function(){
                     } else if(parseInt(data) == 0){
                         $(tr).parents('table').hide('slow', function(){
                             $(tr).parents('table').remove();
-                                    
+                            $(location).attr('href', '/');     
                         });
                         $('.other-check').hide('slow', function(){
                             $('.other-check').remove();
@@ -190,7 +204,6 @@ $(document).ready(function(){
 function initMap() { 
     var lat = $('#map').data('lat');
     var long = $('#map').data('long');
-    console.log(parseFloat(lat));
     var mapDiv = document.getElementById('map');
     var map = new google.maps.Map(mapDiv, {
         center: {lat: parseFloat(lat), lng: parseFloat(long)},
@@ -201,6 +214,22 @@ function initMap() {
     var image = 'http://dealtounsi.com/wp-content/themes/wpsite/images/marker.png';
     var marker = new google.maps.Marker({
       position: {lat: parseFloat(lat), lng: parseFloat(long)},
+      map: map,
+      //icon: image
+    });
+}
+
+function initMapContact() { 
+    var mapDiv = document.getElementById('mapcontact');
+    var map = new google.maps.Map(mapDiv, {
+        center: {lat: 36.811269, lng: 10.142397},
+        zoom: 18,
+        disableDefaultUI: true
+    });
+    
+    var image = 'http://dealtounsi.com/wp-content/themes/wpsite/images/marker.png';
+    var marker = new google.maps.Marker({
+      position: {lat: 36.811269, lng: 10.142397},
       map: map,
       icon: image
     });

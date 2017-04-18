@@ -16,7 +16,7 @@
                 if ( $the_query->have_posts() ) :
                     while ( $the_query->have_posts() ) : $the_query->the_post(); 
             ?>
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-4 col-md-6">
                     <div class="item">                        
                         <figure class="uk-overlay uk-overlay-hover">
                             <?php the_post_thumbnail('post-thumbnail', array('class' => 'uk-overlay-spin'));?>

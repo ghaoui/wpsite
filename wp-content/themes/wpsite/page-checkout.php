@@ -14,9 +14,17 @@
                 'user_id' => $user->ID
             ));
             $coupon_id = $wpdb->insert_id;
+            $msg = '';
             foreach ($myCart as $key => $cart){
                 $prix = get_field('apres_prix', $cart) * $_POST['qte'][$key];
                 $tot = $tot + $prix;
+                
+                $msg .= "Deal : ".get_the_title($cart)."<br>";
+                $msg .= "quantite : ".$_POST['qte'][$key]."<br>";
+                $msg .= "Montant : ".$prix."<br>";
+                $msg .= "Condition : <br>".get_field('condition', $cart)."<br>";
+                $msg .= "------------------------------------------------------------------<br>";
+                
                 $wpdb->insert('deals_coupons_products', array(
                 'id_coupon' => $coupon_id,
                 'id_product' => $cart,
@@ -30,6 +38,12 @@
             ), array(
                 'id' => $coupon_id
             ));
+            $message = "Bonjour <br> Client: ".$user->last_name." ".$user->first_name.".<br>";
+            $message .= "Contenu de commande: ";
+            $message .= $msg;
+            $headers = 'From : '.get_option('admin_email')."\r\n";
+            $title="Détails de commande de client ".$user->last_name." ".$user->first_name." à DealTounsi";
+            wp_mail(get_option('admin_email'), $title, $message, $headers);
             unset($_SESSION['myCart']);
             //if($_POST['']){}
         }

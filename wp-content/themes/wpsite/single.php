@@ -8,15 +8,15 @@
             <?php echo get_the_excerpt() ;?>
         </div>
         <div class="row uk-margin-bottom" data-uk-grid-match="target:'.item-single'">
-            <div class="col-lg-6">
-                <div class="uk-slidenav-position item-single" data-uk-slideshow="animation:'random-fx', autoplay: true, autoplayInterval: 2000">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="uk-slidenav-position item-single" data-uk-slideshow="animation:'random-fx', autoplay: true, autoplayInterval: 4000">
                     <ul class="uk-slideshow">
                             <?php 
                                 
                                 if( have_rows('galerie') ):
                                     while ( have_rows('galerie') ) : the_row(); 
                             ?>
-                        <li><img src="<?php the_sub_field('image'); ?>"></li>
+                        <li><a href="<?php the_sub_field('image'); ?>" data-uk-lightbox><img src="<?php the_sub_field('image'); ?>"></a></li>
                                 <?php
                                     endwhile;
                                 endif; 
@@ -24,7 +24,7 @@
                         </ul>
                     <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
                     <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
-                    <div class="uk-slidenav-position thumbnails" data-uk-slider="infinite:false">
+                    <div class=" hidden-xs uk-slidenav-position thumbnails" data-uk-slider="infinite:false">
 
                         <div class="uk-slider-container">
                             <ul class="uk-slider uk-grid-width-medium-1-5">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="item-single flex-item">
                     <div class="montant">
                         <div class="apres"><?php the_field('apres_prix')?> DT</div>
@@ -72,31 +72,36 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-9 col-md-9 col-sm-9">
                 <?php while(have_posts()): the_post();?>
                 <div class="description">
                     <?php the_content();?>
                 </div>
+                <?php if(get_field('fond_description')):?>
+                <div class="text-center image-description">
+                    <img src="<?php the_field('image_description');?>">
+                </div> 
+                <?php endif;?>
                 <div class="condition">
                     <h2>Les conditions</h2>
                     <?php the_field('condition')?>
                 </div>
                 <div class="row">
                     <?php $maps = get_field('maps');?>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="adresse">
                             où utiliser ce bon plan?<br>
-                            <span><?php echo $maps['address']?></span>
+                            <span><?php echo $maps['address']?></span><br>
+                            <a class="itineraire" href="https://maps.google.com/maps?f=d&daddr=<?php echo $maps['address']?>" target="_blank">Itinéraire</a>
                         </div>                        
                     </div>
-                    <div class="col-lg-8">
-                        
+                    <div class="col-lg-8 col-md-8 col-sm-8">                        
                         <div id="map" data-lat="<?php echo $maps['lat']?>" data-long="<?php echo $maps['lng']?>"></div>
                     </div>
                 </div>
                 <?php endwhile;?>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3 col-sm-3">
                 <?php 
                 $args  = array(
                     'post_type' => 'post',

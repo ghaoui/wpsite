@@ -40,7 +40,7 @@
                 if ( $the_query->have_posts() ) :
                     while ( $the_query->have_posts() ) : $the_query->the_post(); 
             ?>
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6">
                 <a href="<?php the_permalink();?>" class="link-item">
                     <div class="item">
                         <div class="excerpt">
@@ -71,7 +71,11 @@
                     </div>
                     <?php endif;?>
                     <div class="dejaacheter">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php the_field('counter')?>
+                        <?php if(get_field('counter')==0):?>
+                            Soyer<br>le 1er<br>a en profiter
+                        <?php else:?>
+                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php the_field('counter')?>
+                        <?php endif;?>                        
                     </div>
                     
                     <a href="<?php the_permalink();?>" class="link-voir">
